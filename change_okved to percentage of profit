@@ -1,0 +1,68 @@
+import os
+import matplotlib.pyplot as plt
+import seaborn as sns
+from unittest import skip
+import numpy as np
+import pandas as pd 
+
+def transform_okved2(okved):
+    if okved >=1 and okved <=3:
+        return 1
+    elif okved >=4 and okved <=9:
+        return 2
+    elif okved >=10 and okved <=33:
+        return 3
+    elif okved == 35:
+        return 4
+    elif okved >=36 and okved <=39:
+        return 5
+    elif okved >=41 and okved <=43:
+        return 6
+    elif okved >=45 and okved <=47:
+        return 7
+    elif okved >=49 and okved <=53:
+        return 8
+    elif okved >=55 and okved <=56:
+        return 9
+    elif okved >=58 and okved <=63:
+        return 10
+    elif okved >=64 and okved <=66:
+        return 11
+    elif okved == 68:
+        return 12
+    elif okved >=69 and okved <=75:
+        return 13
+    elif okved >=77 and okved <=82:
+        return 14
+    elif okved == 84:
+        return 15
+    elif okved == 85:
+        return 16
+    elif okved >=86 and okved <=88:
+        return 17
+    elif okved >=90 and okved <=93:
+        return 18
+    elif okved >=94 and okved <=96:
+        return 19
+    elif okved >=97 and okved <=98:
+        return 20
+    else:
+        return 21
+        
+train_data = pd.read_csv("C:\\Users\\Администратор\\Desktop\\okved.csv")
+print(train_data.head(10))
+train_data["okved"] = train_data["okved"].map(transform_okved2)
+print(train_data.head(5))
+train_data.to_csv("C:\\Users\\Администратор\\Desktop\\okved.csv")
+
+ok_dic = {1: 28.9,2:37.3,3:16.7,4:9.6 , 5: 4.3,6: 7.1 ,7: 8.8 ,8: 8.0 ,9: 5.1 ,10: 13.6 ,11: 29.9,12: 28.9,12: 6.1,13: 7.4,14: 8.5,15: 6.3,16: 7.2,17: 7.1,18: 8.1,19: 5,20:6.4 ,21: 6.4}
+def transform_okved1(okved):
+    return float(okved)
+def transform_okved(okved):
+    for key, value in ok_dic.items():
+        if okved==key:
+            return value
+train_data["okved"] = train_data["okved"].map(transform_okved1)
+train_data["okved"] = train_data["okved"].map(transform_okved)
+
+train_data.to_csv("C:\\Users\\Администратор\\Desktop\\okved1.csv")
